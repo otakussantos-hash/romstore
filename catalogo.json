@@ -12,7 +12,7 @@
     "DS": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQfMqGRI4jyy-HBMJljpmB34cwAUvFtjEoqOV3yG_cBlUiEls8YWYmZWfq4gZIwIUhGGZ6b6kdKeYZDR8yRnMe2Bh6lnUhzm9qdcITf_DY-MTLjLQ6jqs9lyTkVUcR3-5rdMMAIq9Cygor/s1600/nintendo-ds-logo.jpg"
   },
   "audio": {
-    "versao": "1",
+    "versao": "3",
     "abertura": "audio/abertura.wav",
     "clique": "audio/clique.wav",
     "fundo": "audio/fundo.wav"
