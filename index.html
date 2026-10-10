@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROM Store - Painel admin</title>
+<style>
+:root{--bg:#eceef2;--card:#fff;--ink:#1c2230;--mute:#667085;--line:#d9dde5;--or:#ff7a00;--or2:#e56d00}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 "Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+aside{background:var(--or);color:#fff;padding:28px 22px}
+aside h1{font-size:22px;margin:0 0 24px}
+aside h2{font-size:15px;font-weight:600;margin:0 0 10px;opacity:.9}
+ul{list-style:none;margin:0 0 14px;padding:0}
+#cats li{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.35);font-size:17px}
+#cats button{background:none;border:0;color:#fff;font-size:20px;cursor:pointer;padding:0 6px}
+.add{display:flex;gap:6px}
+.add input{flex:1;min-width:0}
+main{padding:28px;max-width:900px}
+section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:22px}
+h3{margin:0 0 14px;font-size:18px}
+label{display:block;font-weight:600;font-size:13.5px;margin:12px 0 4px}
+input,select,textarea{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+textarea{min-height:76px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--or);color:#fff;border:0;border-radius:6px;padding:9px 16px;font-weight:600}
+.btn:hover{background:var(--or2)}
+.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.sec:hover{background:#f4f5f8}
+aside .btn{background:#fff;color:var(--or2);padding:8px 12px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.game{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.game:last-child{border:0}
+.game small{color:var(--mute)}
+.game .bar button{padding:6px 12px}
+#status{min-height:22px;color:var(--or2);font-weight:600;margin-top:10px}
+:focus-visible{outline:3px solid #1b6ef3;outline-offset:2px}
+#pvwrap{position:relative;width:100%;aspect-ratio:16/9;background:#181820;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+#pvstage{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;line-height:1.25}
+#pvov{position:absolute;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+#pvov .box{background:#fff;border-radius:10px;padding:16px;width:min(340px,86%)}
+#pvpad{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+#pvpad button{min-width:46px}
+.hint{color:var(--mute);font-size:13.5px;margin:10px 0 0}
+.tst{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:13px;color:var(--mute)}
+.tst img{width:64px;height:36px;object-fit:cover;border-radius:4px;background:#e4e6eb}
+.tst.ok span{color:#1a7f37}.tst.erro span{color:#b42318}
+@media(max-width:760px){body{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<aside>
+  <h1>ROM Store</h1>
+  <h2>Categorias</h2>
+  <ul id="cats"></ul>
+  <div class="add">
+    <input id="novaCat" placeholder="Ex.: SNES" aria-label="Nova categoria">
+    <button class="btn" id="addCat">Adicionar</button>
+  </div>
+</aside>
+<main>
+  <section>
+    <div class="bar">
+      <label class="btn sec" style="margin:0;font-size:15px">Abrir catalogo.json<input id="abrir" type="file" accept=".json,application/json" hidden></label>
+      <button class="btn" id="baixar">Baixar catalogo.json</button>
+      <button class="btn sec" id="verPrevia">Ver prévia do usuário</button>
+      <button class="btn sec" id="verLoading">Ver tela de loading</button>
+    </div>
+    <div id="status" role="status"></div>
+  </section>
+
+  <section id="secCons">
+    <h3>Consoles, imagens e sons</h3>
+    <div class="bar"><button class="btn sec" id="padraoCats">Usar N64, PSP, PS1, DS</button></div>
+    <label for="baseUrl">Endereço base (só para a prévia): pasta do repositório que contém audio/ e imagens/</label>
+    <input id="baseUrl" placeholder="https://raw.githubusercontent.com/USUARIO/REPO/main/">
+    <label>Imagem do card de cada console (tela inicial)</label>
+    <div id="imgsCons"></div>
+    <label for="bgTeste">Imagem de fundo (só para testar na prévia)</label>
+    <input id="bgTeste" placeholder="https://... (jpg ou png)">
+    <p class="hint">No Switch a imagem de fundo é escolhida pelo usuário em Configurações &gt; Imagem de fundo, entre os arquivos do cartão SD (pasta sdmc:/switch/romstore/fundos). Use até ~3000×2000; o ideal é 1280×720.</p>
+    <div class="row">
+      <div><label for="aAbertura">Som de abertura</label><input id="aAbertura" placeholder="audio/abertura.wav"></div>
+      <div><label for="aClique">Som ao apertar botão</label><input id="aClique" placeholder="audio/clique.wav"></div>
+    </div>
+    <div class="row">
+      <div><label for="aFundo">Música de fundo</label><input id="aFundo" placeholder="audio/fundo.wav"></div>
+      <div><label for="aVersao">Versão (aumente para o app baixar de novo)</label><input id="aVersao" placeholder="1"></div>
+    </div>
+    <p class="hint">Use caminhos relativos (audio/…, imagens/…) ou links completos. Para trocar um som ou imagem, substitua o arquivo no repositório e aumente a versão. O Switch lê JPG/PNG e sons WAV/OGG/MP3.</p>
+  </section>
+
+  <section>
+    <h3 id="formTitulo">Novo jogo</h3>
+    <div class="row">
+      <div><label for="titulo">Título</label><input id="titulo"></div>
+      <div><label for="sistema">Categoria</label><select id="sistema"></select></div>
+    </div>
+    <label for="descricao">Descrição</label><textarea id="descricao"></textarea>
+    <label for="url">Link direto da ROM</label><input id="url" placeholder="https://...">
+    <div class="row">
+      <div><label for="arquivo">Nome do arquivo (como será salvo)</label><input id="arquivo" placeholder="meujogo.gba"></div>
+      <div><label for="tamanho">Tamanho (exibição)</label><input id="tamanho" placeholder="8 MB"></div>
+    </div>
+    <label for="capa">Link da capa (de preferência 16:9, até 1280x720)</label><input id="capa" placeholder="https://...">
+    <div id="capaTeste"></div>
+    <label for="fotos">Links das fotos de gameplay (um por linha)</label><textarea id="fotos"></textarea>
+    <div id="fotosTeste"></div>
+    <div class="bar" style="margin-top:16px">
+      <button class="btn" id="salvar">Salvar jogo</button>
+      <button class="btn sec" id="limpar">Limpar</button>
+    </div>
+  </section>
+
+  <section>
+    <h3>Jogos cadastrados</h3>
+    <div id="lista"></div>
+  </section>
+
+  <section id="pvsec">
+    <h3>Prévia: como o usuário vê no Switch</h3>
+    <div id="pvwrap" tabindex="0" aria-label="Prévia da tela do app">
+      <div id="pvstage"></div>
+      <div id="pvov"><div class="box">
+        <p style="margin:0 0 8px;font-weight:600">Buscar jogo</p>
+        <input id="pvq" type="text" placeholder="Digite o nome">
+        <div class="bar" style="justify-content:flex-end;margin-top:12px">
+          <button class="btn sec" id="pvqc">Cancelar</button><button class="btn" id="pvqok">OK</button>
+        </div>
+      </div></div>
+    </div>
+    <div id="pvpad">
+      <button class="btn sec" data-k="ZL">ZL</button><button class="btn sec" data-k="L">L</button><button class="btn sec" data-k="R">R</button>
+      <button class="btn sec" data-k="LT" aria-label="Esquerda">←</button>
+      <button class="btn sec" data-k="U" aria-label="Cima">↑</button>
+      <button class="btn sec" data-k="D" aria-label="Baixo">↓</button>
+      <button class="btn sec" data-k="RT" aria-label="Direita">→</button>
+      <button class="btn sec" data-k="Y">Y</button><button class="btn sec" data-k="X">X</button><button class="btn sec" data-k="B">B</button><button class="btn sec" data-k="A">A</button>
+    </div>
+    <p class="hint">A prévia usa os jogos e categorias cadastrados agora, com as imagens dos links. O download aqui é só uma simulação. Clique na tela para usar o teclado: setas, Enter (A), Esc (B), Y (configurações), X (busca), Z (ZL: alfabeto), Q e E (L e R). Sons e imagens relativos só aparecem se você preencher o endereço base acima.</p>
+  </section>
+</main>
+
+<script>
+const novoData = () => ({ categorias: [], imagens: {}, audio: { versao: '1', abertura: '', clique: '', fundo: '' }, jogos: [] });
+let data = novoData(), editando = -1;
+function normalizar(j) {
+  const d = novoData();
+  if (Array.isArray(j.categorias)) d.categorias = j.categorias.filter(x => typeof x === 'string');
+  if (j.imagens && typeof j.imagens === 'object') Object.keys(j.imagens).forEach(k => { if (typeof j.imagens[k] === 'string') d.imagens[k] = j.imagens[k]; });
+  if (j.audio && typeof j.audio === 'object') ['versao', 'abertura', 'clique', 'fundo'].forEach(k => { if (typeof j.audio[k] === 'string') d.audio[k] = j.audio[k]; });
+  d.jogos = Array.isArray(j.jogos) ? j.jogos : [];
+  return d;
+}
+// arquivo final: so grava imagens/audio que foram preenchidos
+function paraArquivo() {
+  const o = { categorias: data.categorias }, im = {}, au = {};
+  data.categorias.forEach(c => { if ((data.imagens[c] || '').trim()) im[c] = data.imagens[c].trim(); });
+  if (Object.keys(im).length) o.imagens = im;
+  ['abertura', 'clique', 'fundo'].forEach(k => { if ((data.audio[k] || '').trim()) au[k] = data.audio[k].trim(); });
+  if (Object.keys(au).length) o.audio = Object.assign({ versao: (data.audio.versao || '1').trim() || '1' }, au);
+  o.jogos = data.jogos;
+  return o;
+}
+// caminhos relativos (audio/x.wav) so aparecem na previa se houver o endereco base
+function resolverUrl(u) {
+  u = direto(u || '');
+  if (!u || /^https?:\/\//i.test(u)) return u;
+  const b = ($('baseUrl') ? $('baseUrl').value.trim() : '');
+  return b ? b.replace(/\/?$/, '/') + u.replace(/^\//, '') : '';
+}
+const $ = id => document.getElementById(id);
+const campos = ['titulo', 'sistema', 'descricao', 'url', 'arquivo', 'tamanho', 'capa'];
+
+function persistir() { try { localStorage.setItem('romstore', JSON.stringify(data)); } catch (e) {} }
+function restaurar() { try { const s = localStorage.getItem('romstore'); if (s) data = normalizar(JSON.parse(s)); } catch (e) {} }
+function aviso(t) { $('status').textContent = t; }
+function slug(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+function direto(u) {
+  u = (u || '').trim();
+  let m;
+  if ((m = u.match(/^https?:\/\/([a-z-]+\.(?:wikipedia|wikimedia)\.org)\/wiki\/(?:File|Ficheiro|Arquivo|Imagem|Image|Archivo|Fichier|Datei):([^?#]+)/i))) return 'https://' + m[1] + '/wiki/Special:FilePath/' + m[2];
+  if ((m = u.match(/^https?:\/\/(?:www\.)?github\.com\/([^\/]+)\/([^\/]+)\/blob\/(.+)$/i))) return 'https://raw.githubusercontent.com/' + m[1] + '/' + m[2] + '/' + m[3].split('?')[0];
+  if ((m = u.match(/^https?:\/\/(?:www\.)?imgur\.com\/(?!a\/|gallery\/)([A-Za-z0-9]+)$/i))) return 'https://i.imgur.com/' + m[1] + '.jpg';
+  if ((m = u.match(/^https?:\/\/drive\.google\.com\/file\/d\/([^\/?]+)/i))) return 'https://lh3.googleusercontent.com/d/' + m[1];
+  if ((m = u.match(/^https?:\/\/drive\.google\.com\/open\?id=([^&]+)/i))) return 'https://lh3.googleusercontent.com/d/' + m[1];
+  if (/^https?:\/\/(?:www\.)?dropbox\.com\//i.test(u)) return u.replace(/([?&])dl=0/, '$1raw=1');
+  return u;
+}
+function testar(box, urls) {
+  box.innerHTML = '';
+  urls.forEach(raw => {
+    const u = direto(raw); if (!u) return;
+    const item = document.createElement('div'); item.className = 'tst';
+    const im = new Image(); im.referrerPolicy = 'no-referrer'; im.alt = '';
+    const info = document.createElement('span'); info.textContent = 'Carregando...';
+    im.onload = () => {
+      const r = im.naturalWidth / im.naturalHeight;
+      if (/\.(webp|avif|gif|bmp)(\?|$)/i.test(u)) { info.textContent = 'Carregou, mas o Switch só lê JPG e PNG. Converta a imagem.'; item.classList.add('erro'); return; }
+      info.textContent = 'OK (' + im.naturalWidth + '×' + im.naturalHeight + ')' + (Math.abs(r - 16 / 9) > 0.25 ? ' - fora de 16:9, aparece com faixas escuras ao redor' : '');
+      item.classList.add('ok');
+    };
+    im.onerror = () => { im.remove(); info.textContent = 'Não carregou. Use o link direto da imagem (abre só a foto e termina em .jpg ou .png).'; item.classList.add('erro'); };
+    item.append(im, info); box.append(item); im.src = u;
+  });
+}
+function atualizarTestes() {
+  testar($('capaTeste'), [$('capa').value.trim()]);
+  testar($('fotosTeste'), $('fotos').value.split('\n').map(x => x.trim()).filter(Boolean));
+}
+let _tt; const _agenda = () => { clearTimeout(_tt); _tt = setTimeout(atualizarTestes, 500); };
+$('capa').addEventListener('input', _agenda); $('fotos').addEventListener('input', _agenda);
+
+function limpar() {
+  editando = -1;
+  campos.forEach(c => { if (c !== 'sistema') $(c).value = ''; });
+  $('fotos').value = '';
+  $('formTitulo').textContent = 'Novo jogo';
+  $('salvar').textContent = 'Salvar jogo';
+  atualizarTestes();
+}
+
+function render() {
+  const ul = $('cats'); ul.innerHTML = '';
+  data.categorias.forEach((c, i) => {
+    const li = document.createElement('li'); li.textContent = c;
+    const b = document.createElement('button'); b.textContent = '×'; b.title = 'Remover ' + c;
+    b.onclick = () => { data.categorias.splice(i, 1); persistir(); render(); };
+    li.append(b); ul.append(li);
+  });
+  const sel = $('sistema'), atual = sel.value; sel.innerHTML = '';
+  data.categorias.forEach(c => { const o = document.createElement('option'); o.textContent = c; sel.append(o); });
+  if (atual) sel.value = atual;
+
+  const lista = $('lista'); lista.innerHTML = '';
+  if (!data.jogos.length) lista.textContent = 'Nenhum jogo ainda. Preencha o formulário acima e clique em Salvar jogo.';
+  data.jogos.forEach((g, i) => {
+    const d = document.createElement('div'); d.className = 'game';
+    const t = document.createElement('div');
+    t.innerHTML = '<strong></strong><br><small></small>';
+    t.firstChild.textContent = g.titulo; t.lastChild.textContent = g.sistema + ' - ' + g.arquivo + ' (letra ' + ((String(g.titulo).normalize('NFD').replace(/[\u0300-\u036f]/g, '').match(/[A-Za-z0-9]/) || ['#'])[0].replace(/[0-9]/, '#').toUpperCase()) + ')';
+    const bar = document.createElement('div'); bar.className = 'bar';
+    const e = document.createElement('button'); e.className = 'btn sec'; e.textContent = 'Editar';
+    e.onclick = () => {
+      editando = i;
+      campos.forEach(c => $(c).value = g[c] || '');
+      $('fotos').value = (g.fotos || []).join('\n'); atualizarTestes();
+      $('formTitulo').textContent = 'Editando: ' + g.titulo; $('salvar').textContent = 'Atualizar jogo';
+      scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    const r = document.createElement('button'); r.className = 'btn sec'; r.textContent = 'Remover';
+    r.onclick = () => { if (confirm('Remover "' + g.titulo + '"?')) { data.jogos.splice(i, 1); persistir(); limpar(); render(); } };
+    bar.append(e, r); d.append(t, bar); lista.append(d);
+  });
+  renderConsoles();
+  if (window.pvRefresh) pvRefresh();
+}
+let _ti;
+function renderConsoles() {
+  const box = $('imgsCons'); box.innerHTML = '';
+  if (!data.categorias.length) box.innerHTML = '<p class="hint">Adicione categorias na barra lateral.</p>';
+  data.categorias.forEach(c => {
+    const w = document.createElement('div'), l = document.createElement('label'), i = document.createElement('input'), t = document.createElement('div');
+    l.textContent = c; i.value = data.imagens[c] || ''; i.placeholder = 'imagens/' + slug(c) + '.jpg'; i.setAttribute('aria-label', 'Imagem de ' + c);
+    const teste = () => testar(t, [resolverUrl(i.value)]);
+    i.addEventListener('input', () => { data.imagens[c] = i.value; persistir(); clearTimeout(_ti); _ti = setTimeout(() => { teste(); window.pvRefresh && pvRefresh(); }, 500); });
+    w.append(l, i, t); box.append(w); teste();
+  });
+  $('aAbertura').value = data.audio.abertura; $('aClique').value = data.audio.clique; $('aFundo').value = data.audio.fundo; $('aVersao').value = data.audio.versao;
+}
+[['aAbertura', 'abertura'], ['aClique', 'clique'], ['aFundo', 'fundo'], ['aVersao', 'versao']].forEach(([id, k]) =>
+  $(id).addEventListener('input', () => { data.audio[k] = $(id).value; persistir(); window.pvRefresh && pvRefresh(); }));
+$('padraoCats').onclick = () => {
+  ['N64', 'PSP', 'PS1', 'DS'].forEach(c => { if (!data.categorias.some(x => x.toLowerCase() === c.toLowerCase())) data.categorias.push(c); });
+  persistir(); render(); aviso('Categorias N64, PSP, PS1 e DS prontas.');
+};
+try { $('baseUrl').value = localStorage.getItem('romstore_base') || ''; } catch (e) {}
+$('baseUrl').addEventListener('input', () => { try { localStorage.setItem('romstore_base', $('baseUrl').value); } catch (e) {} renderConsoles(); window.pvRefresh && pvRefresh(); });
+
+$('addCat').onclick = () => {
+  const v = $('novaCat').value.trim();
+  if (!v) return;
+  if (data.categorias.some(c => c.toLowerCase() === v.toLowerCase())) { aviso('Essa categoria já existe.'); return; }
+  data.categorias.push(v); $('novaCat').value = ''; persistir(); render();
+};
+$('novaCat').addEventListener('keydown', e => { if (e.key === 'Enter') $('addCat').click(); });
+
+$('salvar').onclick = () => {
+  const g = {};
+  campos.forEach(c => g[c] = $(c).value.trim());
+  g.fotos = $('fotos').value.split('\n').map(s => s.trim()).filter(Boolean);
+  const antes = [g.capa].concat(g.fotos).join('|');
+  g.capa = direto(g.capa); g.fotos = g.fotos.map(direto);
+  const ajustou = antes !== [g.capa].concat(g.fotos).join('|');
+  if (!g.arquivo && g.url) g.arquivo = decodeURIComponent(g.url.split('?')[0].split('/').pop());
+  if (!g.titulo || !g.sistema || !g.url || !g.arquivo) { aviso('Preencha título, categoria e link da ROM (o nome do arquivo é deduzido do link).'); return; }
+  if (/[\/\\]|\.\./.test(g.arquivo)) { aviso('O nome do arquivo não pode ter / \\ ou ..'); return; }
+  g.id = slug(g.titulo);
+  const ordem = ['id', 'titulo', 'sistema', 'descricao', 'capa', 'fotos', 'url', 'arquivo', 'tamanho'];
+  const novo = {}; ordem.forEach(k => novo[k] = g[k]);
+  if (editando >= 0) data.jogos[editando] = novo; else data.jogos.push(novo);
+  aviso('Jogo salvo.' + (ajustou ? ' Links de imagem ajustados para links diretos.' : '') + ' Lembre de baixar o catalogo.json e enviar para a hospedagem.');
+  persistir(); limpar(); render();
+};
+$('limpar').onclick = limpar;
+
+$('baixar').onclick = () => {
+  data.jogos.forEach(g => { g.capa = direto(g.capa || ''); g.fotos = (g.fotos || []).map(direto); }); persistir();
+  const blob = new Blob([JSON.stringify(paraArquivo(), null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'catalogo.json'; a.click();
+  URL.revokeObjectURL(a.href);
+  aviso('catalogo.json baixado. Envie-o para a hospedagem.');
+};
+
+$('abrir').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result);
+      if (!Array.isArray(j.jogos)) throw new Error();
+      data = normalizar(j);
+      persistir(); limpar(); render(); aviso('Catálogo carregado: ' + data.jogos.length + ' jogo(s).');
+    } catch (err) { aviso('Esse arquivo não parece um catalogo.json válido.'); }
+  };
+  r.readAsText(f); e.target.value = '';
+};
+
+(function () {
+  const TH = [
+    { n: 'Laranja', bg: '#18181E', ac: '#FF7A00', al: '#FFAA50', sel: '#00AAFF', card: '#fff', ink: '#19191E', tx: '#fff', gr: '#AAAAB6', ph: '#3A3A46' },
+    { n: 'Azul', bg: '#0E1626', ac: '#0078D7', al: '#46A0F0', sel: '#FFC800', card: '#fff', ink: '#141923', tx: '#fff', gr: '#A0AFC3', ph: '#2D3A52' },
+    { n: 'Verde', bg: '#101E18', ac: '#22A05A', al: '#5AC88C', sel: '#FFD60A', card: '#fff', ink: '#141E19', tx: '#fff', gr: '#A0B9AA', ph: '#2C4236' },
+    { n: 'Roxo', bg: '#1A1228', ac: '#8C46DC', al: '#B478F0', sel: '#00DCC8', card: '#fff', ink: '#1C1428', tx: '#fff', gr: '#B4A5C8', ph: '#3E3054' },
+    { n: 'Vermelho', bg: '#1C1010', ac: '#D23232', al: '#F06E6E', sel: '#FFD23C', card: '#fff', ink: '#231414', tx: '#fff', gr: '#C3A5A5', ph: '#502E2E' },
+    { n: 'Claro', bg: '#EBECF2', ac: '#FF7A00', al: '#FFAA50', sel: '#0078DC', card: '#fff', ink: '#19191E', tx: '#1E1E28', gr: '#696978', ph: '#CDCDD7' }
+  ];
+  const GREEN = '#32AA5A', ONACC = '#fff', COLS = 4, PER = 8, SW = 32, SH = 18, SC = 20, ACOLS = 14, SPLASH = 4000;
+  let th = TH[0], themeIdx = 0, opts = { sfx: true, musica: false, snake: true }, bgUrl = '', folders = {}, alphaOpen = false, alphaAnim = 0, t0 = 0, atm = null;
+  let G = [], CONS = [], scr = 'splash', prev = 'home', ci = 0, curLetter = 'Todos', letters = [];
+  let splashStarted = false, sel = 0, ssel = 0, thumb = 0, query = '', msg = '', search = false, view = [], saved = {}, dl = null, tm = null, msgTm = null;
+  let sn = { body: [], dx: 1, dy: 0, ndx: 1, ndy: 0, fx: 0, fy: 0, score: 0, dead: false, last: 0 };
+  const st = $('pvstage'), wrap = $('pvwrap'), ov = $('pvov'), qi = $('pvq');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+  const T = (x, y, sz, c, t, e = '') => `<div style="position:absolute;left:${x}px;top:${y}px;font-size:${sz}px;color:${c};white-space:pre;${e}">${t}</div>`;
+  const TC = (x, y, sz, c, t, e = '') => T(x, y, sz, c, t, 'transform:translateX(-50%);text-align:center;' + e);
+  const TR = (x, y, sz, c, t, e = '') => T(x, y, sz, c, t, 'transform:translateX(-100%);' + e);
+  const R = (x, y, w, h, bg, inner = '', e = '') => `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${bg};${e}">${inner}</div>`;
+  const pic = (url, w, h) => R(0, 0, w, h, th.ph) + (url ? `<img referrerpolicy="no-referrer" src="${esc(url)}" alt="" style="position:absolute;left:0;top:0;width:${w}px;height:${h}px;object-fit:contain" onerror="this.remove()">` : '');
+  const ell = w => `width:${w}px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap`;
+  const gallery = g => [g.capa].concat(g.fotos).filter(Boolean);
+
+  // ---- sons (usa os mesmos links do catalogo; precisa do endereço base se forem relativos) ----
+  let clickA = null, bgm = null;
+  function sound(u) { try { return u ? new Audio(u) : null; } catch (e) { return null; } }
+  function click() { if (!opts.sfx || !clickA) return; try { clickA.currentTime = 0; const p = clickA.play(); if (p && p.catch) p.catch(() => {}); } catch (e) {} }
+  function music() { if (!bgm) return; try { if (opts.musica) { bgm.loop = true; bgm.volume = .4; const p = bgm.play(); if (p && p.catch) p.catch(() => {}); } else bgm.pause(); } catch (e) {} }
+
+  function sizeMB(t) {
+    const m = /([\d.,]+)\s*(GB|MB|KB)?/i.exec(t || '');
+    if (!m) return 10;
+    const v = parseFloat(m[1].replace(',', '.')) || 10, u = (m[2] || 'MB').toUpperCase();
+    return u === 'GB' ? v * 1024 : u === 'KB' ? v / 1024 : v;
+  }
+  function letterOf(t) {
+    const s = String(t).normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const m = /[A-Za-z0-9]/.exec(s);
+    return !m ? '#' : /[0-9]/.test(m[0]) ? '#' : m[0].toUpperCase();
+  }
+  function refilter() {
+    if (!CONS.length) { view = []; letters = ['Todos']; return; }
+    const q = query.toLowerCase(), c = CONS[ci].n.toLowerCase();
+    const base = G.map((g, i) => i).filter(i => G[i].s.toLowerCase() === c && (!q || G[i].t.toLowerCase().includes(q)));
+    base.sort((a, b) => G[a].t.toLowerCase() < G[b].t.toLowerCase() ? -1 : 1);
+    const L = new Set(base.map(i => G[i].L));
+    letters = ['Todos'].concat([...L].filter(x => x !== '#').sort());
+    if (L.has('#')) letters.push('#');
+    if (!letters.includes(curLetter)) curLetter = 'Todos';
+    view = base.filter(i => curLetter === 'Todos' || G[i].L === curLetter);
+  }
+  const letterIdx = () => Math.max(0, letters.indexOf(curLetter));
+  function setLetter(i) { i = Math.max(0, Math.min(letters.length - 1, i)); curLetter = letters[i]; sel = 0; refilter(); }
+
+  // ---- Snake ----
+  function snPlace() { for (;;) { sn.fx = Math.floor(Math.random() * SW); sn.fy = Math.floor(Math.random() * SH); if (!sn.body.some(p => p[0] === sn.fx && p[1] === sn.fy)) return; } }
+  function snReset() { sn.body = [[10, 9], [9, 9], [8, 9]]; sn.dx = sn.ndx = 1; sn.dy = sn.ndy = 0; sn.score = 0; sn.dead = false; snPlace(); sn.last = Date.now(); }
+  function snTurn(x, y) { if (!(x === -sn.dx && y === -sn.dy)) { sn.ndx = x; sn.ndy = y; } }
+  function snStep() {
+    if (sn.dead) return;
+    const now = Date.now();
+    if (now - sn.last < Math.max(60, 130 - sn.score * 3)) return;
+    sn.last = now; sn.dx = sn.ndx; sn.dy = sn.ndy;
+    const hx = (sn.body[0][0] + sn.dx + SW) % SW, hy = (sn.body[0][1] + sn.dy + SH) % SH;
+    for (let i = 0; i < sn.body.length - 1; i++) if (sn.body[i][0] === hx && sn.body[i][1] === hy) { sn.dead = true; return; }
+    sn.body.unshift([hx, hy]);
+    if (hx === sn.fx && hy === sn.fy) { sn.score++; snPlace(); } else sn.body.pop();
+  }
+  function snDraw() {
+    const x0 = 320, y0 = 138;
+    let h = R(x0 - 4, y0 - 4, SW * SC + 8, SH * SC + 8, th.ac) + R(x0, y0, SW * SC, SH * SC, '#0C0C10');
+    h += R(x0 + sn.fx * SC + 3, y0 + sn.fy * SC + 3, SC - 6, SC - 6, '#EB3C3C');
+    sn.body.forEach((p, i) => { h += R(x0 + p[0] * SC + 1, y0 + p[1] * SC + 1, SC - 2, SC - 2, i ? th.al : th.sel); });
+    if (sn.dead) h += R(x0, y0 + SH * SC / 2 - 50, SW * SC, 100, 'rgba(0,0,0,.8)') + TC(640, y0 + SH * SC / 2 - 44, 42, '#fff', 'Game Over') + TC(640, y0 + SH * SC / 2 + 14, 22, th.al, 'A: jogar de novo');
+    return h;
+  }
+
+  // fundo = imagem escolhida pelo usuario (no Switch: Configuracoes > Imagem de fundo)
+  const bgLayer = () => bgUrl ? `<img referrerpolicy="no-referrer" src="${esc(bgUrl)}" alt="" style="position:absolute;left:0;top:0;width:1280px;height:720px;object-fit:cover" onerror="this.remove()">` + R(0, 0, 1280, 720, rgba(th.bg, .65)) : '';
+  // logo da prévia (no app vem de romfs/logo.png ou sdmc:/switch/romstore/logo.png)
+  const logo = (x, y) => R(x, y, 50, 56, '#fff', R(14, 0, 22, 9, th.ac) + R(21, 20, 8, 16, th.ac) + R(11, 34, 28, 5, th.ac), 'border-radius:10px;overflow:hidden') +
+    T(x + 62, y + 2, 26, '#fff', 'ROM', 'font-weight:800;line-height:26px') + T(x + 62, y + 28, 26, '#fff', 'STORE', 'font-weight:800;line-height:26px');
+  const header = (title, right) => R(0, 0, 1280, 76, th.ac) + logo(24, 10) + (title ? T(250, 20, 28, '#fff', esc(title), ell(560)) : '') + (right ? TR(1256, 20, 28, '#fff', esc(right)) : '');
+
+  function draw() {
+    th = TH[themeIdx]; st.style.background = th.bg;
+    let h = '';
+    const n = view.length, nc = CONS.length;
+    if (scr === 'splash') {
+      const el = Date.now() - t0, p = 1 - Math.pow(1 - Math.min(1, el / SPLASH), 2);
+      h += R(0, 0, 1280, 720, th.ac) + R(0, 570, 1280, 14, 'rgba(0,0,0,.28)') + R(0, 570, Math.round(1280 * p), 14, '#fff');
+      h += R(0, 570, 1280, 14, 'transparent', R(((el / 2) % 1680) - 400, 0, 400, 14, 'rgba(255,255,255,.35)'), 'overflow:hidden');
+      h += T(40, 530, 22, '#fff', 'Carregando...');
+      h += `<div style="position:absolute;left:${1280 - 40 - 300}px;top:${720 - 40 - 80}px;width:300px;height:80px;transform:scale(1.4);transform-origin:100% 100%">${logo(88, 12)}</div>`;
+    } else if (scr === 'dl') {
+      const g = dl.g, pct = dl.p;
+      h += bgLayer();
+      h += TC(640, 14, 42, th.tx, 'Baixando...') + TC(640, 66, 28, th.gr, esc(g.t), ell(1000));
+      if (opts.snake) h += TC(640, 108, 22, th.al, 'Snake   |   Pontos: ' + sn.score + '   |   X: esconder') + snDraw();
+      else h += TC(640, 270, 28, th.tx, 'Quer jogar Snake enquanto baixa?') + TC(640, 320, 22, th.al, 'Pressione X');
+      h += R(240, 556, 800, 28, th.ph) + R(240, 556, Math.round(800 * pct), 28, th.ac);
+      h += TC(640, 592, 22, th.tx, (pct * g.mb).toFixed(1) + ' MB / ' + g.mb.toFixed(1) + ' MB') + TC(640, 684, 22, th.gr, 'B: cancelar');
+    } else if (scr === 'home') {
+      h += bgLayer() + header('Consoles');
+      if (!nc) h += T(40, 200, 28, th.gr, 'Cadastre categorias no painel (ou use N64, PSP, PS1, DS)');
+      CONS.forEach((c, i) => {
+        const x = 640 - 170 + (i - ci) * 370, y = 120;
+        if (x > 1280 || x + 340 < 0) return;
+        if (i === ci) h += R(x - 6, y - 6, 352, 412, th.sel);
+        h += R(x, y, 340, 400, th.card,
+          R(10, 10, 320, 230, 'transparent', pic(c.img, 320, 230), 'overflow:hidden') +
+          TC(170, 256, 42, th.ink, esc(c.n), ell(320)) + TC(170, 330, 22, '#6E6E78', c.count + ' jogos') +
+          (i !== ci ? R(0, 0, 340, 400, rgba(th.bg, .47)) : ''));
+      });
+      if (ci > 0) h += T(14, 290, 42, th.tx, '&lt;');
+      if (ci < nc - 1) h += TR(1266, 290, 42, th.tx, '&gt;');
+      h += T(40, 684, 22, th.gr, 'Esq/Dir: console     A: abrir     Y: configurações     +: sair');
+    } else if (scr === 'list') {
+      h += bgLayer() + header(CONS[ci].n + (query ? '  -  busca: ' + query : ''), 'Letra: ' + curLetter);
+      if (!n) h += T(40, 130, 28, th.gr, 'Nenhum jogo encontrado');
+      const page = Math.floor(sel / PER);
+      for (let k = 0; k < PER; k++) {
+        const i = page * PER + k;
+        if (i >= n) break;
+        const g = G[view[i]], gx = 40 + (k % COLS) * 305, gy = 100 + Math.floor(k / COLS) * 240;
+        if (i === sel && !alphaOpen) h += R(gx - 5, gy - 5, 300, 218, th.sel);
+        h += R(gx, gy, 290, 208, th.card, R(0, 0, 290, 160, 'transparent', pic(g.capa, 290, 160), 'overflow:hidden') + T(10, 166, 22, th.ink, esc(g.t), ell(270)));
+      }
+      const pages = Math.max(1, Math.ceil(n / PER));
+      for (let p = 0; p < pages && p < 20; p++) h += R(640 - pages * 7 + p * 14, 610, 8, 8, p === page ? th.tx : th.gr);
+      if (n) h += TR(1240, 640, 22, th.gr, (sel + 1) + ' / ' + n);
+      h += T(40, 684, 22, th.gr, 'ZL: alfabeto     L/R: letra     A: abrir     X: buscar     Y: configurações     B: voltar');
+      if (alphaAnim > 0) {  // alfabeto suspenso: desce da barra, na cor do tema
+        const nl = letters.length, rows = Math.ceil(nl / ACOLS), ph = rows * 62 + 24, y0 = -Math.round((1 - alphaAnim) * ph), cur = letterIdx();
+        let inner = R(0, y0, 1280, ph, th.ac) + R(0, y0 + ph - 4, 1280, 4, th.al);
+        letters.forEach((l, i) => {
+          const cx = 52 + (i % ACOLS) * 84, cy = y0 + 12 + Math.floor(i / ACOLS) * 62;
+          if (i === cur) inner += R(cx, cy, 80, 54, th.sel);
+          inner += TC(cx + 40, cy + (l.length > 1 ? 14 : 8), l.length > 1 ? 22 : 28, i === cur ? th.ink : ONACC, esc(l));
+        });
+        h += R(0, 76, 1280, ph + 12, 'transparent', inner, 'overflow:hidden');
+      }
+    } else if (scr === 'detail') {
+      const g = G[view[sel]], gl = gallery(g);
+      h += bgLayer();
+      thumb = Math.min(thumb, Math.max(0, gl.length - 1));
+      h += R(40, 50, 720, 405, 'transparent', pic(gl[thumb] || '', 720, 405), 'overflow:hidden');
+      for (let i = 0; i < gl.length && i < 5; i++) {
+        const x = 40 + i * 144;
+        if (i === thumb) h += R(x - 4, 481, 138, 82, th.sel);
+        h += R(x, 485, 130, 74, 'transparent', pic(gl[i], 130, 74), 'overflow:hidden');
+      }
+      h += T(800, 50, 22, th.gr, esc(g.s + (g.tam ? '   |   ' + g.tam : '')));
+      h += T(800, 85, 28, th.tx, esc(g.t), 'width:440px;white-space:normal');
+      h += R(800, 190, 440, 360, 'transparent', T(0, 0, 22, th.tx, esc(g.d), 'width:440px;white-space:normal'), 'overflow:hidden');
+      const done = !!saved[g.key];
+      h += R(800, 570, 440, 64, done ? GREEN : th.ac, TC(220, 12, 28, ONACC, done ? 'Baixado (A: baixar de novo)' : 'Baixar'));
+      h += T(40, 590, 22, th.al, esc('Pasta: ' + (folders[g.s] || '(escolha ao baixar)') + '     X: mudar pasta'));
+      if (msg) h += T(40, 635, 22, th.tx, esc(msg));
+      h += T(40, 684, 22, th.gr, 'A: baixar     X: pasta     B: voltar     Esq/Dir: fotos');
+    } else {
+      h += bgLayer() + header('Configurações');
+      const onoff = v => v ? 'Ligado' : 'Desligado';
+      const rows = [['Tema', '<  ' + th.n + '  >'], ['Imagem de fundo', bgUrl ? bgUrl.split('/').pop() : '(nenhuma - A: escolher)'], ['Som ao apertar botões', onoff(opts.sfx)], ['Música de fundo', onoff(opts.musica)], ['Mini game Snake no download', onoff(opts.snake)]]
+        .concat(CONS.map(c => ['Pasta de download - ' + c.n, folders[c.n] || '(escolher)']));
+      const off = Math.max(0, Math.min(ssel - 4, rows.length - 9));
+      for (let r = 0; r < 9 && off + r < rows.length; r++) {
+        const i = off + r, y = 100 + r * 58;
+        if (i === ssel) h += R(40, y - 6, 1200, 52, th.ac);
+        h += T(60, y, 28, i === ssel ? ONACC : th.tx, esc(rows[i][0])) + TR(1220, y + 4, 22, i === ssel ? ONACC : th.al, esc(rows[i][1]), ell(560));
+      }
+      h += T(40, 684, 22, th.gr, 'Cima/Baixo: escolher     A: abrir/alterar     Esq/Dir: mudar     B: voltar');
+    }
+    st.innerHTML = h;
+  }
+
+  function toast(m) {
+    msg = m; clearTimeout(msgTm);
+    msgTm = setTimeout(() => { msg = ''; if (scr === 'detail') draw(); }, 7000);
+  }
+  function startSplash() {
+    clearInterval(tm); scr = 'splash'; t0 = Date.now();
+    tm = setInterval(() => { if (Date.now() - t0 >= SPLASH) { clearInterval(tm); scr = 'home'; } draw(); }, 33);
+  }
+  window.pvSplash = startSplash;
+  function startDl() {
+    const g = G[view[sel]];
+    if (!g.f || !g.s || !g.url || /[\/\\]|\.\./.test(g.f + g.s)) { toast('Dados do jogo inválidos no catálogo'); return; }
+    if (!folders[g.s]) folders[g.s] = 'sdmc:/roms/' + g.s.toLowerCase();  // no Switch abre o seletor de pasta na 1a vez
+    dl = { g: g, p: 0 }; scr = 'dl'; msg = ''; snReset();
+    clearInterval(tm);
+    tm = setInterval(() => {
+      dl.p += (g.mb > 100 ? 0.012 : 0.035) * 0.33;
+      if (opts.snake) snStep();
+      if (dl.p >= 1) {
+        clearInterval(tm); saved[g.key] = 1; scr = 'detail';
+        toast('Salvo em ' + folders[g.s] + '/' + g.f);
+      }
+      draw();
+    }, 33);
+  }
+  function animAlpha() {
+    clearInterval(atm);
+    atm = setInterval(() => {
+      const t = alphaOpen ? 1 : 0;
+      alphaAnim += alphaAnim < t ? .18 : -.18;
+      if (alphaAnim <= 0 || alphaAnim >= 1) { alphaAnim = Math.max(0, Math.min(1, alphaAnim)); clearInterval(atm); }
+      draw();
+    }, 16);
+  }
+  function press(k) {
+    if (search || scr === 'splash') return;
+    click();
+    if (scr === 'dl') {
+      if (k === 'B') { clearInterval(tm); scr = 'detail'; toast('Download cancelado'); }
+      else if (k === 'X') opts.snake = !opts.snake;
+      else if (opts.snake) {
+        if (k === 'LT') snTurn(-1, 0); else if (k === 'RT') snTurn(1, 0);
+        else if (k === 'U') snTurn(0, -1); else if (k === 'D') snTurn(0, 1);
+        else if (k === 'A' && sn.dead) snReset();
+      }
+      draw(); return;
+    }
+    const n = view.length, nc = CONS.length;
+    if (scr === 'home') {
+      if (k === 'LT' || k === 'L') ci = Math.max(0, ci - 1);
+      else if (k === 'RT' || k === 'R') ci = Math.min(nc - 1, ci + 1);
+      else if (k === 'Y') { prev = 'home'; scr = 'set'; ssel = 0; }
+      else if (k === 'A' && nc) { curLetter = 'Todos'; query = ''; sel = 0; alphaOpen = false; alphaAnim = 0; refilter(); scr = 'list'; }
+    } else if (scr === 'list' && alphaOpen) {
+      const li = letterIdx(), nl = letters.length;
+      if (k === 'LT' || k === 'L') setLetter(li - 1);
+      else if (k === 'RT' || k === 'R') setLetter(li + 1);
+      else if (k === 'U') setLetter(li - ACOLS >= 0 ? li - ACOLS : li);
+      else if (k === 'D') setLetter(li + ACOLS < nl ? li + ACOLS : li);
+      else if (k === 'A' || k === 'B' || k === 'ZL') { alphaOpen = false; animAlpha(); }
+    } else if (scr === 'list') {
+      if (k === 'B') scr = 'home';
+      else if (k === 'Y') { prev = 'list'; scr = 'set'; ssel = 0; }
+      else if (k === 'X') { openSearch(); return; }
+      else if (k === 'ZL') { alphaOpen = true; animAlpha(); }
+      else if (k === 'L') setLetter(letterIdx() - 1);
+      else if (k === 'R') setLetter(letterIdx() + 1);
+      else if (k === 'LT') { if (sel % COLS > 0) sel--; }
+      else if (k === 'RT') { if (sel % COLS < COLS - 1 && sel + 1 < n) sel++; }
+      else if (k === 'U') { if (sel - COLS >= 0) sel -= COLS; else { alphaOpen = true; animAlpha(); } }
+      else if (k === 'D') { if (sel + COLS < n) sel += COLS; }
+      else if (k === 'A' && n > 0) { scr = 'detail'; thumb = 0; msg = ''; }
+    } else if (scr === 'detail') {
+      const g = G[view[sel]], cnt = Math.max(1, gallery(g).length);
+      if (k === 'B') scr = 'list';
+      else if (k === 'LT' || k === 'L') thumb = (thumb + cnt - 1) % cnt;
+      else if (k === 'RT' || k === 'R') thumb = (thumb + 1) % cnt;
+      else if (k === 'X') { folders[g.s] = 'sdmc:/roms/' + g.s.toLowerCase() + '/escolhida'; toast('Pasta salva: ' + folders[g.s] + ' (no Switch abre o navegador do cartão SD)'); }
+      else if (k === 'A') { startDl(); }
+    } else {
+      if (k === 'U' && ssel > 0) ssel--;
+      else if (k === 'D' && ssel < 4 + nc) ssel++;
+      else if (k === 'B' || k === 'Y') scr = prev;
+      else if (k === 'A' || k === 'LT' || k === 'RT') {
+        const d = k === 'LT' ? -1 : 1;
+        if (ssel === 0) themeIdx = (themeIdx + d + TH.length) % TH.length;
+        else if (ssel === 1) { if (k === 'A') { const u = $('bgTeste').value.trim(); bgUrl = bgUrl ? '' : (u ? resolverUrl(u) : ''); if (!u && !bgUrl) toast('Cole um link de imagem em "Imagem de fundo" no painel para testar'); } }
+        else if (ssel === 2) opts.sfx = !opts.sfx;
+        else if (ssel === 3) { opts.musica = !opts.musica; music(); }
+        else if (ssel === 4) opts.snake = !opts.snake;
+        else if (k === 'A') { const c = CONS[ssel - 5].n; folders[c] = 'sdmc:/roms/' + c.toLowerCase(); }
+      }
+    }
+    draw();
+  }
+
+  function openSearch() { search = true; ov.style.display = 'flex'; qi.value = query; qi.focus(); }
+  function closeSearch(ok) {
+    if (ok) { query = qi.value.trim(); sel = 0; refilter(); }
+    ov.style.display = 'none'; search = false; draw(); wrap.focus();
+  }
+  $('pvqok').onclick = () => closeSearch(true);
+  $('pvqc').onclick = () => closeSearch(false);
+  qi.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); closeSearch(true); }
+    if (e.key === 'Escape') { e.preventDefault(); closeSearch(false); }
+  });
+  document.querySelectorAll('#pvpad button').forEach(b => {
+    b.addEventListener('mousedown', e => e.preventDefault());
+    b.addEventListener('click', () => press(b.dataset.k));
+  });
+  const KM = { z: 'ZL', Z: 'ZL', ArrowUp: 'U', ArrowDown: 'D', ArrowLeft: 'LT', ArrowRight: 'RT', Enter: 'A', Escape: 'B', Backspace: 'B', y: 'Y', Y: 'Y', x: 'X', X: 'X', q: 'L', Q: 'L', e: 'R', E: 'R' };
+  wrap.addEventListener('keydown', e => {
+    if (search) return;
+    const k = KM[e.key];
+    if (k) { e.preventDefault(); press(k); }
+  });
+  $('verPrevia').onclick = () => $('pvsec').scrollIntoView({ behavior: 'smooth' });
+  $('verLoading').onclick = () => { $('pvsec').scrollIntoView({ behavior: 'smooth' }); pvSplash(); };
+
+  const fitScale = () => { st.style.transform = 'scale(' + (wrap.clientWidth / 1280) + ')'; };
+  if (window.ResizeObserver) new ResizeObserver(fitScale).observe(wrap);
+  window.addEventListener('resize', fitScale);
+
+  window.pvRefresh = function () {
+    if (scr !== 'splash') clearInterval(tm);
+    if (scr === 'dl') scr = 'detail';
+    G = data.jogos.map(g => ({
+      t: g.titulo || '(sem título)', s: g.sistema || '', capa: resolverUrl(g.capa || ''), fotos: (g.fotos || []).map(resolverUrl),
+      tam: g.tamanho || '', mb: sizeMB(g.tamanho), d: g.descricao || '', f: g.arquivo || '', url: g.url || '',
+      key: g.id || g.arquivo || g.titulo, L: letterOf(g.titulo || '')
+    }));
+    CONS = data.categorias.map(c => ({ n: c, img: resolverUrl(data.imagens[c] || ''), count: G.filter(g => g.s.toLowerCase() === c.toLowerCase()).length }));
+    const a = data.audio;
+    clickA = sound(resolverUrl(a.clique)); bgm = sound(resolverUrl(a.fundo));
+    if (opts.musica) music();
+    if (ci >= CONS.length) ci = Math.max(0, CONS.length - 1);
+    if (!CONS.length && scr !== 'splash') scr = 'home';
+    refilter();
+    if (sel >= view.length) sel = Math.max(0, view.length - 1);
+    if ((scr === 'detail' || scr === 'list') && (!view.length && scr === 'detail')) scr = 'list';
+    fitScale(); if (scr === 'splash' && !splashStarted) { splashStarted = true; startSplash(); } else draw();
+  };
+})();
+
+restaurar(); render();
+</script>
+</body>
+</html>
