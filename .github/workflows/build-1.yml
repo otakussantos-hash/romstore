@@ -1,0 +1,78 @@
+name: Compilar ROM Store
+
+on:
+  push:
+    paths-ignore:
+      - 'catalogo.json'
+      - 'audio/**'
+      - 'imagens/**'
+      - '*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkita64:latest
+    env:
+      DEVKITPRO: /opt/devkitpro
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar caminho das ferramentas
+        run: |
+          echo "/opt/devkitpro/devkitA64/bin" >> "$GITHUB_PATH"
+          echo "/opt/devkitpro/tools/bin" >> "$GITHUB_PATH"
+          echo "/opt/devkitpro/pacman/bin" >> "$GITHUB_PATH"
+
+      - name: Instalar bibliotecas do Switch
+        run: dkp-pacman -Sy --noconfirm --needed switch-dev switch-sdl2 switch-sdl2_image switch-sdl2_ttf switch-curl switch-zlib switch-sdl2_mixer
+
+      - name: Preparar codigo e JSON
+        env:
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          mkdir -p include
+          curl -L -o include/json.hpp https://github.com/nlohmann/json/releases/download/v3.11.3/json.hpp
+          sed -i "s|https://SEUUSUARIO.github.io/SEUREPO/catalogo.json|https://raw.githubusercontent.com/${REPO}/${BRANCH}/catalogo.json|" main.cpp
+          grep -n "raw.githubusercontent" main.cpp
+
+      - name: Compilar
+        run: |
+          set -e
+          P=$DEVKITPRO/portlibs/switch
+          PK=$P/bin/aarch64-none-elf-pkg-config
+          for t in aarch64-none-elf-g++ nacptool elf2nro; do
+            command -v $t || { echo "FALTANDO: $t"; ls $DEVKITPRO/devkitA64/bin $DEVKITPRO/tools/bin; exit 1; }
+          done
+          test -x $PK || { echo "FALTANDO: $PK"; ls $P/bin; exit 1; }
+          ARCH="-march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE"
+          aarch64-none-elf-g++ -g -Wall -O2 -ffunction-sections $ARCH -D__SWITCH__ -std=gnu++17 -fexceptions -Iinclude -I$P/include -I$DEVKITPRO/libnx/include $($PK --cflags sdl2 SDL2_image SDL2_ttf SDL2_mixer libcurl) -c main.cpp -o main.o
+          aarch64-none-elf-g++ -specs=$DEVKITPRO/libnx/switch.specs -g $ARCH main.o -L$P/lib -L$DEVKITPRO/libnx/lib $($PK --libs --static sdl2 SDL2_image SDL2_ttf SDL2_mixer libcurl) -lnx -o romstore.elf
+          nacptool --create "ROM Store" "voce" "1.0.0" romstore.nacp
+          elf2nro romstore.elf romstore.nro --nacp=romstore.nacp --icon=icon.jpg --romfsdir=romfs
+          ls -l romstore.nro
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: romstore-nro
+          path: romstore.nro
+
+  publicar:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: romstore-nro
+
+      - name: Publicar na aba Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nro
+          name: ROM Store (NRO)
+          body: "Baixe o romstore.nro e coloque em sdmc:/switch/romstore/ no cartao SD."
+          files: romstore.nro
