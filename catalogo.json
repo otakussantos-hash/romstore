@@ -14,7 +14,7 @@
     "Switch": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/38c0cef0-b1fd-4ec0-8c4c-4aa71596e756/db01s8q-e23bb2f8-47e6-4386-8ea9-6b3dbed7be60.jpg/v1/fill/w_1192,h_670,q_70,strp/nintendo_switch_wallpaper_by_ljdesigner_db01s8q-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTQ0MCIsInBhdGgiOiIvZi8zOGMwY2VmMC1iMWZkLTRlYzAtOGM0Yy00YWE3MTU5NmU3NTYvZGIwMXM4cS1lMjNiYjJmOC00N2U2LTQzODYtOGVhOS02YjNkYmVkN2JlNjAuanBnIiwid2lkdGgiOiI8PTI1NjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.uhrEgTzYoBjEazYNp3_euF-WBNMYsa2AGOOl0GMwJ0g"
   },
   "audio": {
-    "versao": "1",
+    "versao": "3",
     "abertura": "audio/abertura.wav",
     "clique": "audio/clique.wav",
     "fundo": "audio/fundo.wav"
@@ -74,17 +74,17 @@
       "tamanho": "4.8 MB"
     },
     {
-      "id": "aerogauge-usa",
-      "titulo": "AeroGauge (USA)",
-      "sistema": "N64",
-      "descricao": "AeroGauge é um jogo de corrida futurista de 1998 da ASCII Entertainment, com veículos anti-gravidade.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/AeroGauge%20%28USA%29.png",
+      "id": "Netflix",
+      "titulo": "Netflix",
+      "sistema": "Switch",
+      "descricao": "",
+      "capa": "https://www.caviarcriativo.com/blog/wp-content/uploads/2020/06/logotipo-da-netflix.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/AeroGauge%20%28USA%29.png"
+        "https://static01.nyt.com/images/2020/02/06/arts/06netflix/06netflix-videoSixteenByNine3000.jpg?year=2020&h=1685&w=3000&s=3bd7bea90b5427b8b9999bed38e0f4da6d9ba7e65132ddb5457e2d5fb1b7000d&k=ZQJBKqZ0VN&tw=1"
       ],
-      "url": "https://archive.org/download/roms-bestset-nintendo-64/AeroGauge%20%28USA%29.n64.zip",
-      "arquivo": "AeroGauge (USA).n64.zip",
-      "tamanho": "2.9 MB"
+      "url": "https://github.com/otakussantos-hash/netflix-nx/actions/runs/38867747238/artifacts/12031758237",
+      "arquivo": "netflix-player.zip",
+      "tamanho": "14.2 MB"
     },
     {
       "id": "aidyn-chronicles-the-first-mage-usa",
