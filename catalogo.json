@@ -22,10 +22,15 @@
       "id": "007-goldeneye-usa",
       "titulo": "007 - GoldenEye (USA)",
       "sistema": "N64",
-      "descricao": "GoldenEye 007 é um jogo de tiro em primeira pessoa de 1997 desenvolvido pela Rare e publicado pela Nintendo para o Nintendo 64. Baseado no filme de James Bond de 1995, o jogador controla o agente secreto James Bond.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/007%20-%20GoldenEye%20%28USA%29.png",
+      "descricao": "007 First Light is a thrilling espionage action-adventure game from IO Interactive. Players follow James Bond as a young, resourceful, and sometimes reckless recruit in MI6's training program and discover an origin story of the world's most famous spy.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/ar5pnm.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/007%20-%20GoldenEye%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scx79v.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scyx6q.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scyx6r.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scx79w.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scz0hs.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ar44ue.jpg"
       ],
       "url": "https://archive.org/download/roms-bestset-nintendo-64/007%20-%20GoldenEye%20%28USA%29.n64.zip",
       "arquivo": "007 - GoldenEye (USA).n64.zip",
