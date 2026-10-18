@@ -196,10 +196,11 @@
       "id": "automobili-lamborghini-usa",
       "titulo": "Automobili Lamborghini (USA)",
       "sistema": "N64",
-      "descricao": "Jogo clássico de Nintendo 64: Automobili Lamborghini. Uma das aventuras que marcaram a geração 3D do console.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Automobili%20Lamborghini%20%28USA%29.png",
+      "descricao": "Automobili Lamborghini is one of the earlier racing games for the Nintendo 64, developed by Titus. 8 cars are included in this game, among them the Lamborghini Diablo, Porsche 959, Ferrari F50 and some hidden ones. The courses are quite detailed and the effects are decent, including special effects like lens flares. Races take you through six circuits in exotic areas around the world. There are 4 modes in Single Player including Arcade Mode, Championship Mode, Single Race and Time Trials. The game also includes 4 player support.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co4703.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/Automobili%20Lamborghini%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/fste9sjtxhtfzzwyft1t.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/vcpkmitztj0eh72tofsr.jpg"
       ],
       "url": "https://archive.org/download/roms-bestset-nintendo-64/Automobili%20Lamborghini%20%28USA%29.n64.zip",
       "arquivo": "Automobili Lamborghini (USA).n64.zip",
