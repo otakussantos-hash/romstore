@@ -13092,10 +13092,13 @@
       "id": "no-heroes-allowed",
       "titulo": "No Heroes Allowed!",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: No Heroes Allowed!. Título da biblioteca portátil da Sony para o PlayStation Portable.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/No%20Heroes%20Allowed%21%20%28USA%29.png",
+      "descricao": "Experience No Heroes Allowed! originally released on the PSP system, enhanced with up-rendering, rewind, quick save, and custom video filters.\n\nBecome the God of Destruction, summoned to save Badman from an army of heroic forces. Dig a vast network of dungeons and create an ecosystem of hungry monsters to defeat the invading warriors.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co633s.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/No%20Heroes%20Allowed%21%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/sckw4a.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sckw4b.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sckw4c.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sckw4d.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/No%20Heroes%20Allowed%21%20%28USA%29.cso",
       "arquivo": "No Heroes Allowed! (USA).cso",
