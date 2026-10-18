@@ -20145,10 +20145,12 @@
       "id": "the-sims-2-usa",
       "titulo": "The Sims 2 (USA)",
       "sistema": "DS",
-      "descricao": "The Sims 2 é a versão portátil de 2005.",
-      "capa": "https://raw.githubusercontent.com/libretro/libretro-thumbnails/master/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/The%20Sims%202%20%28USA%29.png",
+      "descricao": "The Sims 2 for Nintendo Game Boy Advance takes place in Strangetown. In it, players create Sims to star in a TV series called 'Strangetown'. The player's Sim then stars in 12 episodes of the series. In between episodes, the Sim plays mini games and socializes with other Sims.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co4ja6.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Snaps/The%20Sims%202%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scmxy4.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scmxy5.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scmxy6.jpg"
       ],
       "url": "https://archive.org/download/pack-roms-nintendo-ds-eu-usa-jap-rabbits-games/The%20Sims%202%20%28USA%29.zip",
       "arquivo": "The Sims 2 (USA).zip",
