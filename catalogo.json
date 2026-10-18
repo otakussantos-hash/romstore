@@ -178,10 +178,10 @@
       "id": "asteroids-hyper-64-usa",
       "titulo": "Asteroids Hyper 64 (USA)",
       "sistema": "N64",
-      "descricao": "Jogo clássico de Nintendo 64: Asteroids Hyper 64. Uma das aventuras que marcaram a geração 3D do console.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Asteroids%20Hyper%2064%20%28USA%29.png",
+      "descricao": "Asteroids Hyper 64 is an updated version of the classic arcade blast 'em up and features full 3D environments, all new weapons and defense systems and a 2 player split-screen mode. The gameplay, however, is exactly the same. Pilot a spacecraft and destroy the on-coming asteroids, each of different sizes. Alien ships and black holes are also out there, along with ship upgrades that update your ships weapons and defense systems.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/wyqsfwwyjzxap0igi1nd.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/Asteroids%20Hyper%2064%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scf3ld.jpg"
       ],
       "url": "https://archive.org/download/roms-bestset-nintendo-64/Asteroids%20Hyper%2064%20%28USA%29.n64.zip",
       "arquivo": "Asteroids Hyper 64 (USA).n64.zip",
