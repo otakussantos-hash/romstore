@@ -4245,10 +4245,14 @@
       "id": "angry-birds",
       "titulo": "Angry Birds",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Angry Birds.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Angry%20Birds%20%28USA%29.png",
+      "descricao": "Angry Birds is a 2009 physics-based casual puzzle video game developed by Finnish video game developer Rovio Entertainment. Players control a flock of multi-colored birds on a mission to rescue their eggs from green-colored pigs. Using a slingshot, they launch the birds at these pigs stationed in or around different structures. The goal is to eliminate all the pigs on each level with a limited number of birds.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/ar6n3y.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Angry%20Birds%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scuqsa.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scuqsb.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scuqs7.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scuqs6.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scuqs8.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Angry%20Birds%20%28USA%29.cso",
       "arquivo": "Angry Birds (USA).cso",
