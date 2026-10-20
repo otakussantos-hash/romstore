@@ -4019,10 +4019,14 @@
       "id": "actual-crimes-jack-the-ripper",
       "titulo": "Actual Crimes - Jack the Ripper",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Actual Crimes - Jack the Ripper.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Actual%20Crimes%20-%20Jack%20the%20Ripper%20%28USA%29.png",
+      "descricao": "Travel back to 1880s London to help Scotland Yard's detectives solve the crime of the century. Visit world-famous landmarks such as Piccadilly Circus and Buckingham Palace. Search crime scenes and solve mini puzzles in your hunt for clues.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co9cjv.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Actual%20Crimes%20-%20Jack%20the%20Ripper%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/yijhxrstlgliqcz5mgas.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sqxbgb5mpjbwereubjab.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/a77y5t9iopd4cr5hzaam.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/dhyie5zsnmcxkdfd82nt.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/avu9pqapzt7oydyqrey2.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Actual%20Crimes%20-%20Jack%20the%20Ripper%20%28USA%29.cso",
       "arquivo": "Actual Crimes - Jack the Ripper (USA).cso",
