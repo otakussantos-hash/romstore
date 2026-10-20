@@ -4224,10 +4224,8 @@
       "titulo": "Ambassador Kane",
       "sistema": "PSP",
       "descricao": "Jogo de PSP: Ambassador Kane.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Ambassador%20Kane%20%28Europe%29.png",
-      "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Ambassador%20Kane%20%28Europe%29.png"
-      ],
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co7yqd.jpg",
+      "fotos": [],
       "url": "https://archive.org/download/psp-cso-collection/Ambassador%20Kane%20%28Europe%29.cso",
       "arquivo": "Ambassador Kane (Europe).cso",
       "tamanho": "26.2 MB"
