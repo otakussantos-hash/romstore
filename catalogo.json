@@ -4234,11 +4234,9 @@
       "id": "ancient-game-treasures-mill",
       "titulo": "Ancient Game Treasures - Mill",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Ancient Game Treasures - Mill.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Ancient%20Game%20Treasures%20-%20Mill%20%28USA%29.png",
-      "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Ancient%20Game%20Treasures%20-%20Mill%20%28USA%29.png"
-      ],
+      "descricao": "A board game from G1M2.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co7yqb.jpg",
+      "fotos": [],
       "url": "https://archive.org/download/psp-cso-collection/Ancient%20Game%20Treasures%20-%20Mill%20%28USA%29.cso",
       "arquivo": "Ancient Game Treasures - Mill (USA).cso",
       "tamanho": "10.0 MB"
