@@ -4364,19 +4364,6 @@
       "tamanho": "255.9 MB"
     },
     {
-      "id": "aquattack",
-      "titulo": "Aquattack!",
-      "sistema": "PSP",
-      "descricao": "Jogo de PSP: Aquattack!.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Aquattack%21%20%28USA%29.png",
-      "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Aquattack%21%20%28USA%29.png"
-      ],
-      "url": "https://archive.org/download/psp-cso-collection/Aquattack%21%20%28USA%29.cso",
-      "arquivo": "Aquattack! (USA).cso",
-      "tamanho": "7.9 MB"
-    },
-    {
       "id": "arcade-air-hockey-bowling",
       "titulo": "Arcade Air Hockey & Bowling",
       "sistema": "PSP",
