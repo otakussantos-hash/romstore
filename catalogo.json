@@ -4144,11 +4144,9 @@
       "id": "alien-havoc",
       "titulo": "Alien Havoc",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Alien Havoc.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Alien%20Havoc%20%28USA%29.png",
-      "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Alien%20Havoc%20%28USA%29.png"
-      ],
+      "descricao": "Alien Havoc is a throwback to the classic arcade game genre, putting gamers in command of a little alien who must pluck cows from farms on Earth, load them onto his spaceship, and bring them back to his home planet. The farmers, however, won't let their cows go without a fight. Players must tackle wrapping farm mazes of confusion, play hide and sneak under the cover of tall grass, and throw veggies, rocks, or whatever they can get their alien claws on at the farmers as they fight to bring these valuable livestock back to their home world.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/sc11ck3.jpg",
+      "fotos": [],
       "url": "https://archive.org/download/psp-cso-collection/Alien%20Havoc%20%28USA%29.cso",
       "arquivo": "Alien Havoc (USA).cso",
       "tamanho": "8.4 MB"
