@@ -4353,10 +4353,11 @@
       "id": "ape-quest",
       "titulo": "Ape Quest",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Ape Quest.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Ape%20Quest%20%28USA%29.png",
+      "descricao": "The ape kingdom is cursed and it's up to you, the prince, to redeem yourself and restore peace to the land! Battle your way through the evil minions that have overrun Toqsica Kingdom by leveling up your character, collecting new weapons and items, and completing an endless variety of mini-games in this RPG-style ape adventure. It's more fun than a barrel of monkeys, or apes for that matter!",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co2nhb.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Ape%20Quest%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scggxe.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scggxf.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Ape%20Quest%20%28USA%29.cso",
       "arquivo": "Ape Quest (USA).cso",
