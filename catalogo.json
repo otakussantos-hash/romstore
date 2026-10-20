@@ -108,10 +108,13 @@
       "id": "air-boarder-64-europe",
       "titulo": "Air Boarder 64 (Europe)",
       "sistema": "N64",
-      "descricao": "Jogo clássico de Nintendo 64: Air Boarder 64. Uma das aventuras que marcaram a geração 3D do console.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Air%20Boarder%2064%20%28Europe%29.png",
+      "descricao": "Air Boarder 64 is a futuristic racing game for the Nintendo 64. It is very similar to the Tony Hawks Pro Skater series, although the game features hover boards instead of the usual skateboards. Various game modes are available in which you either have to win the race challenges or get a high score by performing different tricks.\n\nThe North American version was supposed to release as 'AirBoardin' USA' but was canceled.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co54up.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/Air%20Boarder%2064%20%28Europe%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/yaf6fszvwxuotwuu2sly.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scdo18.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scdo19.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scdo1a.jpg"
       ],
       "url": "https://archive.org/download/roms-bestset-nintendo-64/Air%20Boarder%2064%20%28Europe%29.n64.zip",
       "arquivo": "Air Boarder 64 (Europe).n64.zip",
