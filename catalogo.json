@@ -47,13 +47,16 @@
       "tamanho": "25.3 MB"
     },
     {
-      "id": "1080-snowboarding-japan-usa-enja",
+      "id": "1080-snowboarding-japan-usa-en-ja",
       "titulo": "1080 Snowboarding (Japan, USA) (En,Ja)",
       "sistema": "N64",
-      "descricao": "1080° Snowboarding é um jogo de esporte de snowboard de 1998 desenvolvido e publicado pela Nintendo para o Nintendo 64. É conhecido por sua física realista e trilha sonora.",
-      "capa": "https://raw.githubusercontent.com/HarryTheTurtle/RetroArch-Nintendo-64-USA-Box-Art/master/Nintendo%20-%20Nintendo%2064/Named_Boxarts/1080%20TenEighty%20Snowboarding%20%28Japan%2C%20USA%29%20%28En%2CJa%29.png",
+      "descricao": "1080° Snowboarding is an intense snowboarding game in which the player gets to choose between many different boards, tricks, courses and much more.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/ar1knn.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Snaps/1080%20Snowboarding%20%28Japan%2C%20USA%29%20%28En%2CJa%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/ut7osge57ot4s48o5zm9.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/vtm7pkr9gzzi48qfxsze.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/lgrh49fp979uxeeol3ha.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/lmlygqeby0ivgtla0ndt.jpg"
       ],
       "url": "https://archive.org/download/roms-bestset-nintendo-64/1080%20Snowboarding%20%28Japan%2C%20USA%29%20%28En%2CJa%29.n64.zip",
       "arquivo": "1080 Snowboarding (Japan, USA) (En,Ja).n64.zip",
