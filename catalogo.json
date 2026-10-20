@@ -4168,10 +4168,11 @@
       "id": "alien-zombie-death",
       "titulo": "Alien Zombie Death",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Alien Zombie Death.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Alien%20Zombie%20Death%20%28USA%29.png",
+      "descricao": "Somewhere far far away in a random solar system, a lone space man dies... horribly. Take control of said fateful space man as he battles to his end against the dreaded Alien Zombies! Using a standard laser gun and a few pickups along the way, make sure you take out as many of those Alien Zombie suckers before they take you down. Its that simple. It's Alien Zombie Death.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co70ox.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Alien%20Zombie%20Death%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/b5hxblvll2zkrdmhhhc5.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/xh8dx7mohsne5sfjafcp.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Alien%20Zombie%20Death%20%28USA%29.cso",
       "arquivo": "Alien Zombie Death (USA).cso",
