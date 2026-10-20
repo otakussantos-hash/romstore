@@ -4114,10 +4114,14 @@
       "id": "age-of-zombies",
       "titulo": "Age of Zombies",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Age of Zombies.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Age%20of%20Zombies%20%28USA%29.png",
+      "descricao": "From Halfbrick, the creators of Fruit Ninja and Jetpack Joyride, comes an unforgettable comedy adventure!\n\nLock and load through the history of time as wisecracking hero Barry Steakfries, who is looking for nothing more than to shoot some zombies and make it back in time for a hearty dinner.\n\nThe evil Professor Brains has sent hordes of undead to the furthest reaches of time, but Steakfries won’t be taking that lying down. He’ll take it with a gun, a Zombie T-Rex and a whole repertoire of cheesy one-liners!\n\nKEY FEATURES:\n- Shoot up ninjas, mummies and cavemen with a huge variety of weapons and explosives.\n- Single player campaign with six unique time periods: Feudal Japan, Prehistoric Times, Ancient Egypt and more.\n- Bonus Survival Mode to take your zombie-blasting skills to the next level.\n- Massive boss fights, including a Zombie T-Rex!",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/ar7c8.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Age%20of%20Zombies%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/ml5iq2ounykjgrtys327.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ecnq6lanlophxllqaoiy.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/szemtaum57wumh7u3xdc.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sc8p0d.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/sc8p0e.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Age%20of%20Zombies%20%28USA%29.cso",
       "arquivo": "Age of Zombies (USA).cso",
