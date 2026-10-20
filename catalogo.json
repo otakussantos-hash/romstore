@@ -4277,11 +4277,9 @@
       "id": "apache-overkill",
       "titulo": "Apache Overkill",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Apache Overkill.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Apache%20Overkill%20%28USA%29.png",
-      "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Apache%20Overkill%20%28USA%29.png"
-      ],
+      "descricao": "Guide your chopper in this action-packed shoot'em up game based on the popular web game series. Collect missiles, weapons and powerups, targetting enemy tanks, trucks, troops, fighter planes and ground troops.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co70p4.jpg",
+      "fotos": [],
       "url": "https://archive.org/download/psp-cso-collection/Apache%20Overkill%20%28USA%29.cso",
       "arquivo": "Apache Overkill (USA).cso",
       "tamanho": "4.8 MB"
