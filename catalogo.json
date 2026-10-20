@@ -4208,10 +4208,12 @@
       "id": "alpha-mission-ii",
       "titulo": "Alpha Mission II",
       "sistema": "PSP",
-      "descricao": "Jogo de PSP: Alpha Mission II.",
-      "capa": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Boxarts/Alpha%20Mission%20II%20%28USA%29.png",
+      "descricao": "Alpha Mission II is a 2D vertical scrolling shooter with a great deal of depth for two players moving vertically up the screen boards shooting anything that moves. Equip up to three pieces of armor, which also serve as weapons, for a variety of attacks such as the laser and flamethrower. Use them to defeat the evil “Fulvar” and save mankind!",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/scgoc6.jpg",
       "fotos": [
-        "https://thumbnails.libretro.com/Sony%20-%20PlayStation%20Portable/Named_Snaps/Alpha%20Mission%20II%20%28USA%29.png"
+        "https://images.igdb.com/igdb/image/upload/t_720p/scgoc7.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scgoc8.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/scwlue.jpg"
       ],
       "url": "https://archive.org/download/psp-cso-collection/Alpha%20Mission%20II%20%28USA%29.cso",
       "arquivo": "Alpha Mission II (USA).cso",
