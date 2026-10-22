@@ -7,8 +7,6 @@ A barra do topo (cor do tema) tem a logo; **ZL** (ou "cima" na 1ª linha) faz o 
 A letra é reconhecida sozinha pela 1ª letra do título (acentos tratados; números/símbolos vão em `#`).
 `sistema` no catálogo deve ser só o nome do console (`PSP`, `DS`...), sem faixas de letras.
 
-<img width="512" height="512" alt="375" src="https://github.com/user-attachments/assets/c2d0fdbf-17c1-49de-8d7a-73d53efda059" />
-
 ## Logo
 `romfs/logo.png` é embutida no app (troque e recompile). Para testar sem recompilar, copie um `logo.png` para `sdmc:/switch/romstore/`.
 `icon.jpg` (256x256) é o ícone do app no menu de homebrews.
