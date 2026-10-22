@@ -19078,22 +19078,6 @@
       "url": "https://archive.org/download/psp-cso-collection/Zuma%20%28USA%29.cso",
       "arquivo": "Zuma (USA).cso",
       "tamanho": "13.6 MB"
-    },
-    {
-      "id": "silent-hill-2",
-      "titulo": "SILENT HILL 2",
-      "sistema": "Switch",
-      "descricao": "The second entry in the Silent Hill franchise, Silent Hill 2 is a narrative-focused third-person psychological survival horror game with emphasis on combat, exploration and puzzle-solving elements which follows James Sunderland, a man who receives a letter, seemingly sent by his three-years-deceased wife Mary, in which he is beckoned to the fog-ridden town of Silent Hill at the same time as numerous other people troubled by their past.",
-      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/ar4kdu.jpg",
-      "fotos": [
-        "https://images.igdb.com/igdb/image/upload/t_720p/sc8915.jpg",
-        "https://images.igdb.com/igdb/image/upload/t_720p/sc8917.jpg",
-        "https://images.igdb.com/igdb/image/upload/t_720p/sc8916.jpg",
-        "https://images.igdb.com/igdb/image/upload/t_720p/sc8919.jpg"
-      ],
-      "url": "https://github.com/cutarev/sh2-nx/releases/download/v0.65/sh2-nx.nro",
-      "arquivo": "sh2-nx.nro",
-      "tamanho": ""
     }
   ]
 }
