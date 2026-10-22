@@ -19112,6 +19112,23 @@
       "url": "https://archive.org/download/resident-evil-3-nemesis-pt-br-dublado-e-traduzido/Resident%20Evil%203%20-%20Nemesis%20%5BPT-BR%5D%20%28Dublado%20e%20Traduzido%29.bin",
       "arquivo": "Resident Evil 3 - Nemesis [PT-BR] (Dublado e Traduzido).bin",
       "tamanho": ""
+    },
+    {
+      "id": "parasite-eve-ii-pt-br-disco-1",
+      "titulo": "Parasite Eve II (PT-BR) (Disco 1)",
+      "sistema": "PS1",
+      "descricao": "Parasite Eve II is an action role-playing survival horror video game released exclusively for the PlayStation. The game was developed by Square and published in Japan in 1999 and in both North America and, unlike the previous game, in PAL regions in 2000. It is the sequel to Parasite Eve and the second game in the series of the same name.\n\nParasite Eve II is set several years after the events in the original game. The protagonist from the first game, Aya Brea, also features in this game as the playable character. She becomes involved with another outbreak of Mitochondrial creatures. Gameplay diverges from the previous game: battles take place in real time and the area of action is less restrictive. The approach is more typical of traditional survival horror games, although some role-playing elements are retained.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/mpumzrbuukrxag2uajzc.jpg",
+      "fotos": [
+        "https://images.igdb.com/igdb/image/upload/t_720p/nzudddd3j3zff6axeizq.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/dpzakysbu5uo4rubkkcj.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ar3to3.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ar3to5.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ar3to2.jpg"
+      ],
+      "url": "https://archive.org/download/parasite-eve-ii-pt-br-disco-2/Parasite%20Eve%20II%20%28PT-BR%29%20%28Disco%201%29.bin",
+      "arquivo": "Parasite Eve II (PT-BR) (Disco 1).bin",
+      "tamanho": ""
     }
   ]
 }
