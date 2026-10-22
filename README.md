@@ -1,6 +1,7 @@
 # Romstore-nx
+ 
+<img width="256" height="256" alt="icon" src="https://github.com/user-attachments/assets/a0f5b780-6fb4-4ceb-9904-bb5d9e098ed6" />
 
-https://github.com/otakussantos-hash/romstore/blob/main/icon.jpg?raw=true
 Catálogo e downloader de ROMs para Nintendo Switch (NRO).
 
 ## Menu
