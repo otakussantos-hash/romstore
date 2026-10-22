@@ -19095,6 +19095,23 @@
       "url": "https://archive.org/download/gunners-heaven-pt-br/Gunners%20Heaven%20%28PT-BR%29.bin",
       "arquivo": "Gunners Heaven (PT-BR).bin",
       "tamanho": ""
+    },
+    {
+      "id": "resident-evil-3-nemesis",
+      "titulo": "Resident Evil 3: Nemesis",
+      "sistema": "PS1",
+      "descricao": "Resident Evil 3: Nemesis is a survival horror video game and the third instalment in the Resident Evil series. Like its two predecessors, it is a third-person action-adventure game with polygonal characters on pre-rendered backgrounds with cinematic camera angles. Although the game uses the same basic engine and gameplay as the previous games, the gameplay is improved by features such as auto-targeting, a 180-degree spin, and a new dodge move that allows Jill to avoid enemy attacks. The PC and Dreamcast versions include all eight of Jill's possible costumes, as well as the mercenary mini-game Operation Mad Jackal, which allows players to play as one of the three Umbrella soldiers. On the PlayStation version, these special features must be unlocked by beating the game with a high score.",
+      "capa": "https://images.igdb.com/igdb/image/upload/t_720p/jfcrdcguoxfuldo5blr3.jpg",
+      "fotos": [
+        "https://images.igdb.com/igdb/image/upload/t_720p/v5taxpsxbengllwhep6n.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/rvjb70g68lwwehqnqpa9.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/wiwmyubr1753px6p5emi.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/dac3qjahaxymbnuh4j18.jpg",
+        "https://images.igdb.com/igdb/image/upload/t_720p/ptgwkx3xebyhs2lqkg0a.jpg"
+      ],
+      "url": "https://archive.org/download/resident-evil-3-nemesis-pt-br-dublado-e-traduzido/Resident%20Evil%203%20-%20Nemesis%20%5BPT-BR%5D%20%28Dublado%20e%20Traduzido%29.bin",
+      "arquivo": "Resident Evil 3 - Nemesis [PT-BR] (Dublado e Traduzido).bin",
+      "tamanho": ""
     }
   ]
 }
